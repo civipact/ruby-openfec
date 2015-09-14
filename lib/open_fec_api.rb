@@ -3,6 +3,12 @@ require "open_fec_api/client"
 require "open_fec_api/response"
 require "open_fec_api/candidate"
 require "open_fec_api/committee"
+require "open_fec_api/schedule"
+require "open_fec_api/search"
+require "open_fec_api/financial"
+
+#require "open_fec_api/search_response"
+
 
 module OpenFecApi
 =begin

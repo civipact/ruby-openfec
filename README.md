@@ -1,10 +1,7 @@
-# OpenFecApi
+# ruby-openfec
 
-[![Gem Version](https://badge.fury.io/rb/open_fec_api.svg)](http://badge.fury.io/rb/open_fec_api)
 
 A ruby wrapper for Open Federal Elections Commission API.
-
-Makes requests to the "candidates" endpoint.
 
 ## About OpenFEC API
 
@@ -15,21 +12,23 @@ OpenFEC API allows you to explore the way candidates and committees fund their c
 The API is a RESTful web service supporting full-text and field-specific searches on FEC data.This API allows you to explore the vast array of campaign finance data that the FEC collects. Each endpoint focuses on a different aspect of disclosure. Information is tied to the underlying forms by file ID and image ID.
 
 Base URI:		  https://api.open.fec.gov/v2/
+
 HTTP Method:	  GET
+
 Response format: .json
+
 
 ## Installation
 
-Add `gem 'open_fec_api'` to your application's *Gemfile* and run `bundle install`, or install manually with `gem install open_fec_api`.
+Add `gem 'ruby-openfec'` to your application's *Gemfile* and run `bundle install`, or install manually with `gem install ruby-openfec`.
 
 ## Configuration
 
-OpenFecApi::Client.api_key = 'yourapikeyfromtheurlabove'
+Configure a client with your [API key](https://api.data.gov/signup/) before making requests.
 
-OLD: Configure a client with your [API key](https://api.data.gov/signup/) before making requests.
 
 ```` rb
-client = OpenFecApi::Client.new("api_key_123")
+OpenFecApi::Client.api_key = 'yourapikeyfromtheurlabove'
 ````
 
 ## Usage
@@ -37,55 +36,116 @@ client = OpenFecApi::Client.new("api_key_123")
 Make a request.
 
 ```` rb
-response = client.candidates
+candidates = OpenFecApi::Candidates.all
 ````
 
-Request different pages by setting the `:page` request parameter. Avoid rate-limits by increasing the `:per_page` request parameter to 100.
+Request a specific page by setting the `:page` parameter. Avoid reaching rate-limits by updating the `:per_page` request parameter, up to 100.
 
 ```` rb
 options = {:page => 1, :per_page => 100}
-response = client.candidates(options)
-while response.page < response.pages do
-  options.merge!({:page => response.page + 1})
-  response = client.candidates(options)
-end
+candidates = OpenFecApi::Candidates.all_with(options)
 ````
 
 Make requests using endpoint-specific parameters.
 
 ```` rb
 options = {:party => "DEM"}
-response = client.candidates(options)
+candidates = OpenFecApi::Candidates.all_with(options)
 ````
 
 Make requests on Committee endpoint
 
 ```` rb
-response = client.committees(options)
+committees = OpenFecApi::Committees.all
 ````
 
-## Contributing
+Request Committee history, by 'committee_id' parameter
+```` rb
+options = {:committee_id => "C00462390"}
+response = OpenFecApi::Committee.history(options)
+````
 
-Help wrap all the [endpoints](ENDPOINTS.md)!
-
-Browse existing issues or create a new issue to communicate bugs, desired features, etc.
-
-After forking the repo and pushing your changes, create a pull request referencing the applicable issue(s).
 
 ### Installation
 
-Check out the repo with `git clone git@github.com:debate-watch/open-fec-api-ruby.git`, and `cd open-fec-api-ruby`.
+Check out the repo with `git clone http://github.com/chriscondon/ruby-openfec, then `cd ruby-openfec`.
 
 After checking out the repo, run `bin/setup` to install dependencies.
 
 ### Testing
 
-Run `bundle exec rake` or `bundle exec rspec spec/` to run the tests.
+Run `bundle exec rspec spec/` to run the tests.
 
-You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`.
+### Classes / Methods
 
-### Releasing
 
-Update the version number in `version.rb`, then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+OpenFecApi::Candidate
+
+Candidate.all
+Candidate.all_sort_by(field)
+Candidate.all_where(options = {})
+Candidate.by_name(name)
+Candidate.history(candidate_id, options = {})
+Candidate.committees(candidate_id, options = {})
+Candidate.committee_history(candidate_id, options = {})
+Candidate.communication_costs(candidate_id, options = {})
+Candidate.electioneering_costs(candidate_id, options = {})
+Candidate.history_by_cycle(candidate_id, cycle)
+
+
+OpenFecApi::Committee
+
+Committee.all
+Committee.all_sort_by(sort_field, options = {})
+Committee.all_where(options)
+Committee.history(options)
+Committee.history_by_cycle(committee_id, cycle)
+Committee.communication_costs(committee_id)
+Committee.electioneering_costs(committee_id)
+Committee.reports(committee_id)
+Committee.financial_totals(committee_id)
+Committee.schedule_a_by_contributor(committee_id)
+Committee.schedule_a_by_employer(committee_id)
+
+
+OpenFecApi::Schedule
+
+Schedule.a_all
+Schedule.a_by_contributor(options)
+Schedule.a_by_contributor_type_and_candidate(options = {})
+Schedule.a_by_employer(options)
+Schedule.a_by_occupation(options)
+Schedule.a_by_size(options)
+Schedule.a_by_size_and_candidate(options = {})
+Schedule.a_by_state
+Schedule.a_by_state_and_candidate(options = {})
+Schedule.a_by_state(options)
+Schedule.a_by_zip({options})
+
+Schedule.b_all
+Schedule.b_by_purpose({options})
+Schedule.b_by_recipient(options = {})
+Schedule.b_by_recipient_id(options = {})
+Schedule.b_by_committee_and_candidate(committee_id, options = {})
+
+Schedule.e_all
+Schedule.e_by_candidate({options})
+
+
+OpenFecApi::Financial
+
+Financial.committee_reports(committee_id)
+Financial.committee_totals(committee_id)
+Financial.elections({query_options})
+Financial.reports_by_committee_type(committee_type)
+
+
+OpenFecApi::Search
+
+Search.candidates(name)
+Search.committees(name)
+Search.filings(options = {})
+Search.reporting_dates(options = {})
+Search.elections(options = {})
+

@@ -6,20 +6,17 @@ module OpenFecApi
       context 'when configured' do
         before do
           OpenFecApi::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
-          #@client = OpenFecApi::Client.new
-          #@client = OpenFecApi::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
         end
 
 
         it "contains a valid API key" do
           @committees = OpenFecApi::Committee.new
-          
           expect(@committees.has_api_key?)
         end
 
-        it "returns responses" do
+
+        it "returns valid json responses" do
           response = OpenFecApi::Committee.all
-          pp response.summary
           expect(response).to be_kind_of(OpenFecApi::Response)
         end
 
@@ -30,22 +27,13 @@ module OpenFecApi
           expect(response.results.map{|c| c["treasurer_name"]}.uniq).to eql(["RANDI M WILLIS"])
         end
 
-        # it "accepts pagination options and avoids rate limits" do
-        #   options = {:page => 1, :per_page => 100}
-        #   response = request_and_print(options)
-        #   expect(response.results_count).to eql(100)
-        #   while response.page < response.pages && response.page < 5 do
-        #     options.merge!({:page => response.page + 1})
-        #     response = request_and_print(options)
-        #   end
-        #   expect(true)
-        # end
 
         it "filters committee by state" do
           options = {:state => "VA"}
           response = OpenFecApi::Committee.all_where(options)
           expect(response.results.map{|c| c["state"]}.uniq).to eql(["VA"])
         end
+
 
         it "prevents unrecognized params from being requested" do
           unrecognized_params = {:favorite_show => "Seinfeld"}
@@ -54,7 +42,36 @@ module OpenFecApi
           expect(!recognized_params.keys.include?("favorite_show"))
         end
 
-      end
-    end
-  end
-end
+
+        it "returns Committee history" do
+          options = "C00462390"
+          response = OpenFecApi::Committee.history(options)
+          expect(response.results.map{|c| c["treasurer_name"]}.uniq).to eql(["EDEAN BUNDICK"])
+        end
+
+
+        it "returns Committee history by cycle" do
+          id = "C00462390"
+          cyc = "2012"
+          response = OpenFecApi::Committee.history_by_cycle(id, cyc)
+          expect(response.results.map{|c| c["treasurer_name"]}.uniq).to eql(["EDEAN BUNDICK"])
+        end
+
+
+        it "raises an error if one of the parameters is missing for history_by_cycle method" do
+          id = "C00462390"
+          cycle = nil
+          expect { response = OpenFecApi::Committee.history_by_cycle(id, cycle) }.to raise_error(RuntimeError)
+        end
+
+
+        # it "will return a list of communication costs for a given committee, by candidate_id" do
+        #   committee_id = "C70002126"
+        #   response = OpenFecApi::Committee.communication_costs(committee_id)
+        #   expect(response.results.committee.map{|c| c["name"]}.uniq).to eql(["UNITED MINE WORKERS OF AMERICA COAL MINERS POLITICAL ACTION COMMITTEE"])
+        # end
+
+      end #context
+    end #describe committee
+  end #Rspec.describe
+end #OpenFec
