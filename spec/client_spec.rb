@@ -1,25 +1,25 @@
 require 'spec_helper'
 #
 
-module OpenFecApi
+module OpenFec
   RSpec.describe Client do
     describe '#Client' do
       context 'When configured' do
         before do
-          OpenFecApi::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
-          @client = OpenFecApi::Client.new
+          OpenFec::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
+          @client = OpenFec::Client.new
         end
 
  
         it "contains a valid api key" do
-          @client = OpenFecApi::Client.new
+          @client = OpenFec::Client.new
           expect(@client.has_api_key?)
         end
 
         # #MAJOR EDITS NEEDED HERE!
         # it "returns responses" do
         #   response = @client.candidates
-        #   expect(response).to be_kind_of(OpenFecApi::Response)
+        #   expect(response).to be_kind_of(OpenFec::Response)
         # end
 
         # it "accepts pagination options and avoids rate limits" do
@@ -58,4 +58,4 @@ module OpenFecApi
 
     end #describe #Client
   end #RSpec Describe Client
-end #modeule OpenFecApi
+end #modeule OpenFec

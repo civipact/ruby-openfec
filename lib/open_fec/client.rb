@@ -1,6 +1,6 @@
 require 'httparty'
 
-module OpenFecApi
+module OpenFec
   class Client
     attr_reader :api_key
     include HTTParty
@@ -12,7 +12,7 @@ module OpenFecApi
     ##################
     # Client Methods #
 
-    def self.is_valid(string)
+    def is_valid(string)
       !(string.nil? || string.empty?)
     end
 
@@ -20,7 +20,7 @@ module OpenFecApi
      @@api_key
     end
 
-    def self.hash_valid?(h = {})
+    def hash_valid?(h = {})
       !(h.nil? || h.empty?)
     end
 
@@ -32,11 +32,16 @@ module OpenFecApi
       !(self.api_key.nil? || self.api_key.empty?)
     end
 
-    def self.make_request(response)
+    def make_request(response)
       return Response.new(response)
     end
 
-    def self.merge_options(q = {}, o = {}, param_type)
+    def default_query
+      #Creates a 'query' hash, setting by default 'api_key' and 'per_page => 100'
+      return { 'api_key' => @@api_key } # 'per_page' => '100' }
+    end
+
+    def merge_options(q = {}, o = {}, param_type)
       req_params = o.select{|k, v| @@valid_request_params[param_type].include?(k.to_s)}
       req_params.each do |k, v|
         q.merge!({k.to_s => v})
@@ -174,5 +179,46 @@ module OpenFecApi
 
 
 
+
+
+    # def self.is_valid(string)
+    #   !(string.nil? || string.empty?)
+    # end
+
+    # def self.api_key
+    #  @@api_key
+    # end
+
+    # def self.hash_valid?(h = {})
+    #   !(h.nil? || h.empty?)
+    # end
+
+    # def self.api_key=(key)
+    #  @@api_key = key
+    # end
+
+    # def has_api_key?
+    #   !(self.api_key.nil? || self.api_key.empty?)
+    # end
+
+    # def self.make_request(response)
+    #   return Response.new(response)
+    # end
+
+    # def self.new_query
+    #   #Creates a 'query' hash, setting by default 'api_key' and 'per_page => 100'
+    #   return { 'api_key' => @@api_key, 'per_page' => '100' }
+    # end
+
+    # def self.merge_options(q = {}, o = {}, param_type)
+    #   req_params = o.select{|k, v| @@valid_request_params[param_type].include?(k.to_s)}
+    #   req_params.each do |k, v|
+    #     q.merge!({k.to_s => v})
+    #   end
+    #   return q
+    # end
+
+
+
   end #class Client
-end #module OpenFecAPI 
+end #module OpenFec 

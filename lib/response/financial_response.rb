@@ -1,11 +1,8 @@
-module OpenFecApi
-  class Response
-    attr_reader :request, :headers, :api_version, :pagination, :results
+module OpenFec
+  class Financial_Response < Response
+		attr_reader :pagination, :results
 
-    def initialize(response)
-      @request = response.request
-      @headers = response.headers
-      @api_version = response["api_version"]
+  	def initialize(response)
       @pagination = response["pagination"]
       @results = response["results"]
     end
@@ -43,7 +40,7 @@ module OpenFecApi
     end
 
     def summary
-      "PAGE #{page}/#{pages} -- RATE #{remaining}/#{limit} -- #{first_result_name} ... #{last_result_name}"
+      results.count
     end
-  end
-end
+  end #class financial_response
+end #module OpenFec

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-openfec (0.1.0)
+    open_fec (0.1.0)
       httparty (~> 0.13)
 
 GEM
@@ -41,7 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.7)
-  ruby-openfec!
+  open_fec!
   pry (~> 0.10)
   rake (~> 10.0)
   rspec (~> 3.1)

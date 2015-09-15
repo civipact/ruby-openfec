@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-module OpenFecApi
+module OpenFec
   RSpec.describe Client do
     describe '#Client' do
       context 'when configured' do
         before do
-          @client = OpenFecApi::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
+          @client = OpenFec::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
         end
 
 
@@ -15,12 +15,12 @@ module OpenFecApi
 
 # require 'spec_helper'
 
-# module OpenFecApi
+# module OpenFec
 # RSpec.describe Candidate do
 #   describe '#Candidate' do
 #     context 'when configured' do
 #       before do
-#         @client = OpenFecApi::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
+#         @client = OpenFec::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
 #       end
 
         # def request_and_print(options)
@@ -37,7 +37,7 @@ module OpenFecApi
 
         it "returns responses in json format" do
           response = @client.candidate.all
-          expect(response).to be_kind_of(OpenFecApi::Response)
+          expect(response).to be_kind_of(OpenFec::Response)
         end
 
         # it "accepts pagination options and avoids rate limits" do
@@ -85,14 +85,14 @@ end
 
 # require 'spec_helper'
 
-# module OpenFecApi
+# module OpenFec
 #   RSpec.describe Candidate do
 #     describe '#candidates' do
 #       context 'when configured' do
 #         before do
-#           #OpenFecApi::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
-#           #@client = OpenFecApi::Client.new
-#           @client = OpenFecApi::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
+#           #OpenFec::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
+#           #@client = OpenFec::Client.new
+#           @client = OpenFec::Client.new('raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M')
 #         end
 
 #         # def request_and_print(options)
@@ -109,7 +109,7 @@ end
 
 #         it "returns responses in json format" do
 #           response = @client.candidate.all
-#           expect(response).to be_kind_of(OpenFecApi::Response)
+#           expect(response).to be_kind_of(OpenFec::Response)
 #         end
 
 #         it "accepts pagination options and avoids rate limits" do
@@ -177,7 +177,7 @@ end
 #     end #describe #candidates
 #   end #Rspec.describe Candidate
 
-# end #module openFecApi
+# end #module OpenFec
 
 
 

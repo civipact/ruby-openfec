@@ -28,7 +28,7 @@ Configure a client with your [API key](https://api.data.gov/signup/) before maki
 
 
 ```` rb
-OpenFecApi::Client.api_key = 'yourapikeyfromtheurlabove'
+OpenFec::Client.api_key = 'yourapikeyfromtheurlabove'
 ````
 
 ## Usage
@@ -36,33 +36,33 @@ OpenFecApi::Client.api_key = 'yourapikeyfromtheurlabove'
 Make a request.
 
 ```` rb
-candidates = OpenFecApi::Candidates.all
+candidates = OpenFec::Candidates.all
 ````
 
 Request a specific page by setting the `:page` parameter. Avoid reaching rate-limits by updating the `:per_page` request parameter, up to 100.
 
 ```` rb
 options = {:page => 1, :per_page => 100}
-candidates = OpenFecApi::Candidates.all_with(options)
+candidates = OpenFec::Candidates.all_with(options)
 ````
 
 Make requests using endpoint-specific parameters.
 
 ```` rb
 options = {:party => "DEM"}
-candidates = OpenFecApi::Candidates.all_with(options)
+candidates = OpenFec::Candidates.all_with(options)
 ````
 
 Make requests on Committee endpoint
 
 ```` rb
-committees = OpenFecApi::Committees.all
+committees = OpenFec::Committees.all
 ````
 
 Request Committee history, by 'committee_id' parameter
 ```` rb
 options = {:committee_id => "C00462390"}
-response = OpenFecApi::Committee.history(options)
+response = OpenFec::Committee.history(options)
 ````
 
 
@@ -80,7 +80,7 @@ Run `bundle exec rspec spec/` to run the tests.
 ### Classes / Methods
 
 
-OpenFecApi::Candidate
+OpenFec::Candidate
 
 Candidate.all
 Candidate.all_sort_by(field)
@@ -94,7 +94,7 @@ Candidate.electioneering_costs(candidate_id, options = {})
 Candidate.history_by_cycle(candidate_id, cycle)
 
 
-OpenFecApi::Committee
+OpenFec::Committee
 
 Committee.all
 Committee.all_sort_by(sort_field, options = {})
@@ -109,7 +109,7 @@ Committee.schedule_a_by_contributor(committee_id)
 Committee.schedule_a_by_employer(committee_id)
 
 
-OpenFecApi::Schedule
+OpenFec::Schedule
 
 Schedule.a_all
 Schedule.a_by_contributor(options)
@@ -133,7 +133,7 @@ Schedule.e_all
 Schedule.e_by_candidate({options})
 
 
-OpenFecApi::Financial
+OpenFec::Financial
 
 Financial.committee_reports(committee_id)
 Financial.committee_totals(committee_id)
@@ -141,7 +141,7 @@ Financial.elections({query_options})
 Financial.reports_by_committee_type(committee_type)
 
 
-OpenFecApi::Search
+OpenFec::Search
 
 Search.candidates(name)
 Search.committees(name)
