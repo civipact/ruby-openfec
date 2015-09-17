@@ -46,5 +46,11 @@ module OpenFec
       "PAGE #{page}/#{pages} -- RATE #{remaining}/#{limit} -- #{first_result_name} ... #{last_result_name}"
     end
 
+    def all_committees
+      @committee_names = []
+      results.each { |r| @committee_names << r["name"] }
+      return @committee_names
+    end
+
   end #class candidate_response
 end #module OpenFec

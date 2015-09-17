@@ -107,6 +107,14 @@ module OpenFec
           expect(treas_names.include?("JOHN J BANOVIC"))
         end
 
+        it "returns a list of committe names for a given candidate " do
+          id = "H4IL07037"
+          @candidates = OpenFec::Candidate.new
+          response = @candidates.committees(id)
+          @committee_names = response.all_committees
+          expect(@committee_names.include?("DAVIS FOR CONGRESS/FRIENDS OF DAVIS"))
+        end
+
       end #context
     end #describe candidate
   end #RSPEC.describe Candidate
