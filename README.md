@@ -11,7 +11,7 @@ OpenFEC API allows you to explore the way candidates and committees fund their c
 
 The API is a RESTful web service supporting full-text and field-specific searches on FEC data.This API allows you to explore the vast array of campaign finance data that the FEC collects. Each endpoint focuses on a different aspect of disclosure. Information is tied to the underlying forms by file ID and image ID.
 
-Base URI:		  https://api.open.fec.gov/v2/
+Base URI:		  https://api.open.fec.gov/v1/
 
 HTTP Method:	  GET
 
@@ -80,8 +80,9 @@ Run `bundle exec rspec spec/` to run the tests.
 ### Classes / Methods
 
 
-OpenFec::Candidate
+#### OpenFec::Candidate
 
+```ruby
 Candidate.all
 Candidate.all_sort_by(field)
 Candidate.all_where(options = {})
@@ -92,10 +93,11 @@ Candidate.committee_history(candidate_id, options = {})
 Candidate.communication_costs(candidate_id, options = {})
 Candidate.electioneering_costs(candidate_id, options = {})
 Candidate.history_by_cycle(candidate_id, cycle)
+```
 
+#### OpenFec::Committee
 
-OpenFec::Committee
-
+```ruby
 Committee.all
 Committee.all_sort_by(sort_field, options = {})
 Committee.all_where(options)
@@ -107,10 +109,11 @@ Committee.reports(committee_id)
 Committee.financial_totals(committee_id)
 Committee.schedule_a_by_contributor(committee_id)
 Committee.schedule_a_by_employer(committee_id)
+```
 
+#### OpenFec::Schedule
 
-OpenFec::Schedule
-
+```ruby
 Schedule.a_all
 Schedule.a_by_contributor(options)
 Schedule.a_by_contributor_type_and_candidate(options = {})
@@ -131,21 +134,23 @@ Schedule.b_by_committee_and_candidate(committee_id, options = {})
 
 Schedule.e_all
 Schedule.e_by_candidate({options})
+```
 
+#### OpenFec::Financial
 
-OpenFec::Financial
-
+```ruby
 Financial.committee_reports(committee_id)
 Financial.committee_totals(committee_id)
 Financial.elections({query_options})
 Financial.reports_by_committee_type(committee_type)
+```
 
+#### OpenFec::Search
 
-OpenFec::Search
-
+```ruby
 Search.candidates(name)
 Search.committees(name)
 Search.filings(options = {})
 Search.reporting_dates(options = {})
 Search.elections(options = {})
-
+```
