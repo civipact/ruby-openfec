@@ -43,5 +43,62 @@ module OpenFec
       @results.count
     end
 
+    def by_size
+      #return hash of candidate's schedule A contributions by size.
+      @contributions = {}
+      percentages = {}
+      total = 0
+      @results.each do |r|
+        total += r['total']
+        @contributions[ r['size'].to_s ] = r['total']
+      end
+      @contributions.each do |k, v|
+        percentages[k + '-percent'] = (@contributions[k] / total).round(4)
+      end
+      @contributions.merge!(percentages)
+      @contributions['total'] = total.round(2).to_s
+      return @contributions
+    end
+
+    def by_contributor_type
+      #total
+      #individual amount
+      #individual percentage
+      #committee amount
+      #committe percentage
+      @contributions = {}
+      total = 0
+      @results.each do |r|
+        total += r["total"]
+        if r["individual"]
+          @contributions['individual'] = r["total"]
+        else
+          @contributions['committee'] = r["total"]
+        end
+      end
+      @contributions['individual-percent'] = (@contributions['individual'] / total).round(4)
+      @contributions['committee-percent'] = (@contributions['committee'] / total).round(4)
+      @contributions['total'] = total.to_s
+      return @contributions
+    end
+
+    def by_state(home_state)
+      @contributions = {}
+      total = 0
+      outside_contrib = 0
+      @results.each do |r|
+        total += r['total']
+        if r['state'] == home_state
+          @contributions['home-contribution'] = r['total']
+        end
+      end
+      @contributions['outside-contribution'] = total - @contributions['home-contribution']
+      @contributions['home-percent'] = (@contributions['home-contribution'] / total).round(4)
+      @contributions['outside-percent'] = (@contributions['outside-contribution'] / total).round(4)
+      @contributions['total'] = total
+      return @contributions
+    end
+
+
   end #class schedule_response
 end #module OpenFec
