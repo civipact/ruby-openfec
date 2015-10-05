@@ -92,10 +92,11 @@ module OpenFec
           @contributions['home-contribution'] = r['total']
         end
       end
-      @contributions['outside-contribution'] = total - @contributions['home-contribution']
+      @contributions['outside-contribution'] = (total - @contributions['home-contribution']).round(2)
+      @contributions['home-contribution'] = (@contributions['home-contribution']).round(2)
       @contributions['home-percent'] = (@contributions['home-contribution'] / total).round(4)
       @contributions['outside-percent'] = (@contributions['outside-contribution'] / total).round(4)
-      @contributions['total'] = total
+      @contributions['total'] = total.round(2)
       return @contributions
     end
 
