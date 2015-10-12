@@ -5,22 +5,22 @@ module OpenFec
     describe '#schedules' do
       context 'Basic setup' do
         before do
-          OpenFec::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
+          OpenFec::Client.api_key = 'API_KEY'
         end
 
 
-        # it "contains a valid API key" do
-        #   @schedules = OpenFec::Schedule.new
-        #   expect(@schedules.has_api_key?)
-        # end
+        it "contains a valid API key" do
+          @schedules = OpenFec::Schedule.new
+          expect(@schedules.has_api_key?)
+        end
 
 
-        # it "returns schedule A data in json format" do
-        #   @schedules = OpenFec::Schedule.new
-        #   response = @schedules.a_all
-        #   #pp response.summary
-        #   expect(response).to be_kind_of(OpenFec::Schedule_Response)
-        # end
+        it "returns schedule A data in json format" do
+          @schedules = OpenFec::Schedule.new
+          response = @schedules.a_all
+          #pp response.summary
+          expect(response).to be_kind_of(OpenFec::Schedule_Response)
+        end
 
 
         # it "returns all schedule A data by contributor" do
@@ -66,23 +66,23 @@ module OpenFec
         #   expect(response).to be_kind_of(OpenFec::Schedule_Response)
         # end
 
-        # it "returns a Committee's schedule A data by occupation" do
-        #   options = { 'committee_id' => 'C00000729'}
-        #   @schedules = OpenFec::Schedule.new
-        #   response = @schedules.a_by_occupation(options)
-        #   #response = OpenFec::Schedule.a_by_occupation(options)
-        #   #pp response.summary
-        #   expect(response).to be_kind_of(OpenFec::Schedule_Response)
-        # end
-
-
-        it "returns all schedule A data by size" do
-          options = {'candidate_id' => 'S4PA00121' , 'cycle' => 2016 }
+        it "returns a Committee's schedule A data by occupation" do
+          options = { 'committee_id' => 'C00000729'}
           @schedules = OpenFec::Schedule.new
-          response = @schedules.a_by_size_and_candidate(options)
-          #response = OpenFec::Schedule.a_by_size
+          response = @schedules.a_by_occupation(options)
+          #response = OpenFec::Schedule.a_by_occupation(options)
           #pp response.summary
-          #puts response
+          puts response.count
+          expect(response).to be_kind_of(OpenFec::Schedule_Response)
+        end
+
+
+        it "returns all schedule A data by size and candidate" do
+          options = {'candidate_id' => 'S4PA00121' , 'cycle' => 2010 }
+          @schedules = OpenFec::Schedule.new
+          #response = @schedules.a_all
+          response = @schedules.a_by_size_and_candidate(options)
+          #puts response.results_count
           expect(response).to be_kind_of(OpenFec::Schedule_Response)
         end
 
@@ -302,7 +302,7 @@ module OpenFec
 
       it 'returns total when calling candidate by size for a given cycle ' do
         @schedules = OpenFec::Schedule.new
-        options = {'candidate_id' => 'S4PA00121' , 'cycle' => '2016' }
+        options = {'candidate_id' => 'S4PA00121' , 'cycle' => 2016 }
         a_by_size_response = @schedules.a_by_size_and_candidate(options)
         @size_hash = a_by_size_response.by_size
         expect(@size_hash["total"] == "6641280.1")

@@ -5,7 +5,7 @@ module OpenFec
     describe '#Financial' do
       context 'Basic setup' do
         before do
-          OpenFec::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
+          OpenFec::Client.api_key = 'API_KEY'
         end
 
 

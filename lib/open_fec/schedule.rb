@@ -112,10 +112,4 @@ module OpenFec
 
   end #class
 end #module
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> dd32e315a8d5c25fb2bed55d4867c67608afe4a1

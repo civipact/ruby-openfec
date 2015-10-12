@@ -48,10 +48,12 @@ module OpenFec
       @contributions = {}
       percentages = {}
       total = 0
-      @results.each do |r|
-        total += r['total']
-        @contributions[ r['size'].to_s ] = r['total']
-      end
+      if !@results.nil?
+        @results.each do |r| 
+          total += r['total']
+          @contributions[ r['size'].to_s ] = r['total']
+        end
+      end 
       @contributions.each do |k, v|
         percentages[k + '-percent'] = (@contributions[k] / total).round(4)
       end
@@ -68,12 +70,14 @@ module OpenFec
       #committe percentage
       @contributions = {}
       total = 0
-      @results.each do |r|
-        total += r["total"]
-        if r["individual"]
-          @contributions['individual'] = r["total"]
-        else
-          @contributions['committee'] = r["total"]
+      if !@results.nil?
+        @results.each do |r| 
+          total += r["total"]
+          if r["individual"]
+            @contributions['individual'] = r["total"]
+          else
+            @contributions['committee'] = r["total"]
+          end
         end
       end
       @contributions['individual-percent'] = (@contributions['individual'] / total).round(4)
@@ -86,10 +90,12 @@ module OpenFec
       @contributions = {}
       total = 0
       outside_contrib = 0
-      @results.each do |r|
-        total += r['total']
-        if r['state'] == home_state
-          @contributions['home-contribution'] = r['total']
+      if !@results.nil?
+        @results.each do |r| 
+          total += r['total']
+          if r['state'] == home_state
+            @contributions['home-contribution'] = r['total']
+          end
         end
       end
       @contributions['outside-contribution'] = (total - @contributions['home-contribution']).round(2) unless @contributions['outside-contribution'].nil?

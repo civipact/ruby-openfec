@@ -6,7 +6,7 @@ module OpenFec
     describe '#Candidate' do
       context 'When configured' do
         before do
-          OpenFec::Client.api_key = 'raGR4XbELamehq14HZCCK6i7LJ93U9Ftw0kZVU0M'
+          OpenFec::Client.api_key = 'API_KEY'
         end
 
         it "contains a valid api key" do
