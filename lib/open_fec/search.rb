@@ -9,7 +9,6 @@ module OpenFec
 			search_request('candidates', 'candidates_search_params', options )
 		end
 
-
 		def committees(name)
 			raise "Missing search parameter for committees search" unless is_valid(name)
 			options = { 'q' => name.to_s }
@@ -24,7 +23,6 @@ module OpenFec
 		def reporting_dates(options = {})
 			raise "Missing search parameters for reporting_dates search" unless hash_valid?(options)
 			search_request('reporting_dates', 'reporting_dates_params', options )
-			
 		end
 
 	  def elections(options = {})
@@ -32,9 +30,7 @@ module OpenFec
 			search_request('elections', 'elections_search_params', options )
 		end
 
-
 		protected
-
 
     def search_request(search_endpoint, param_type, options = {})
     	query = {'api_key' => @@api_key }
@@ -48,6 +44,3 @@ module OpenFec
 
 	end #class Search
 end #module OpenFec
-
-
-

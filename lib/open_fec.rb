@@ -13,10 +13,6 @@ require "response/schedule_response"
 require "response/search_response"
 require "response/financial_response"
 
-
-
-
-
 module OpenFec
 
 end
