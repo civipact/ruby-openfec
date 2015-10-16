@@ -33,36 +33,37 @@ OpenFec::Client.api_key = 'yourapikeyfromtheurlabove'
 
 ## Usage
 
-Make a request.
+Create an instance of a class
 
 ```` rb
-candidates = OpenFec::Candidates.all
+candidates = OpenFec::Candidate.new
 ````
 
 Request a specific page by setting the `:page` parameter. Avoid reaching rate-limits by updating the `:per_page` request parameter, up to 100.
 
 ```` rb
 options = {:page => 1, :per_page => 100}
-candidates = OpenFec::Candidates.all_with(options)
+lots_of_candidates = candidates.all_with(options)
 ````
 
 Make requests using endpoint-specific parameters.
 
 ```` rb
 options = {:party => "DEM"}
-candidates = OpenFec::Candidates.all_with(options)
+democrats = candidates.all_with(options)
 ````
 
 Make requests on Committee endpoint
 
 ```` rb
-committees = OpenFec::Committees.all
+committees = OpenFec::Committee.new
+every_committee = committees.all
 ````
 
 Request Committee history, by 'committee_id' parameter
 ```` rb
 options = {:committee_id => "C00462390"}
-response = OpenFec::Committee.history(options)
+com_hist = committees.history(options)
 ````
 
 

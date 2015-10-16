@@ -7,10 +7,6 @@ module OpenFec
 	     candidate_request('all')
 	    end
 
-	    def all_sort_by(field)
-	    	#SORT HERE
-	    end
-
 	    def all_where(options = {})
 	  		candidate_request('all', options)
 	    end
@@ -51,6 +47,11 @@ module OpenFec
 	    def history_by_cycle(candidate_id, cycle)
 	    	raise "Parameter(s) missing for history_by_cycle" unless is_valid(candidate_id) && is_valid(cycle)
 	    	return get_candidate_response( self.class.get("/candidate/#{candidate_id}/history/#{cycle}/", query: {'api_key' => @@api_key } ))
+	    end
+
+	    def committee_history_by_cycle(candidate_id, cycle)
+	    	raise "Parameter(s) missing for history_by_cycle" unless is_valid(candidate_id) && is_valid(cycle)
+	    	return get_candidate_response( self.class.get("/candidate/#{candidate_id}/committees/history/#{cycle}/", query: {'api_key' => @@api_key } ))
 	    end
 
 	    #########
