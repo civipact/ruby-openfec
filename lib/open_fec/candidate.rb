@@ -45,12 +45,12 @@ module OpenFec
 	    end
 
 	    def history_by_cycle(candidate_id, cycle)
-	    	raise "Parameter(s) missing for history_by_cycle" unless is_valid(candidate_id) && is_valid(cycle)
+	    	raise "Parameter(s) missing for history_by_cycle" unless is_valid(candidate_id) && !cycle.nil?
 	    	return get_candidate_response( self.class.get("/candidate/#{candidate_id}/history/#{cycle}/", query: {'api_key' => @@api_key } ))
 	    end
 
 	    def committee_history_by_cycle(candidate_id, cycle)
-	    	raise "Parameter(s) missing for history_by_cycle" unless is_valid(candidate_id) && is_valid(cycle)
+	    	raise "Parameter(s) missing for history_by_cycle" unless is_valid(candidate_id) && !cycle.nil?
 	    	return get_candidate_response( self.class.get("/candidate/#{candidate_id}/committees/history/#{cycle}/", query: {'api_key' => @@api_key } ))
 	    end
 
