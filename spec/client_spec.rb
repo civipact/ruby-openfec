@@ -6,7 +6,7 @@ module OpenFec
     describe '#Client' do
       context 'When configured' do
         before do
-          OpenFec::Client.api_key = 'API_KEY'
+          OpenFec::Client.api_key = 'STUB_API_KEY'
           @client = OpenFec::Client.new
         end
 

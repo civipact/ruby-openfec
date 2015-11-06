@@ -5,7 +5,7 @@ module OpenFec
     describe '#committees' do
       context 'when configured' do
         before do
-          OpenFec::Client.api_key = 'API_KEY'
+          OpenFec::Client.api_key = 'STUB_API_KEY'
         end
 
 

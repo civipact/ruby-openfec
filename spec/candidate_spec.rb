@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'json'
 #require 'rails_helper'
 
 module OpenFec
@@ -6,7 +7,7 @@ module OpenFec
     describe '#Candidate' do
       context 'When configured' do
         before do
-          OpenFec::Client.api_key = 'API_KEY'
+          OpenFec::Client.api_key = 'STUB_API_KEY'
         end
 
         it "contains a valid api key" do
@@ -18,6 +19,7 @@ module OpenFec
           @candidates = OpenFec::Candidate.new
           response = @candidates.all
           #response = OpenFec::Candidate.all
+          puts response.pagination
           expect(response).to be_kind_of(OpenFec::Response)
         end
 
@@ -26,6 +28,7 @@ module OpenFec
           @candidates = OpenFec::Candidate.new
           response = @candidates.all_where(options)
           #response = OpenFec::Candidate.all_where(options)
+          puts response.results
           expect(response.results.map{|c| c["state"]}.uniq).to eql(["VA"])
         end
 
@@ -34,6 +37,7 @@ module OpenFec
           @candidates = OpenFec::Candidate.new
           response = @candidates.all_where(options)
           #response = OpenFec::Candidate.all_where(options)
+          puts response.results
           expect(response.results.map{|c| c["party"]}.uniq).to eql(["DEM"])
         end
 
@@ -42,6 +46,7 @@ module OpenFec
           @candidates = OpenFec::Candidate.new
           response = @candidates.all_where(options)
           #response = OpenFec::Candidate.all_where(options)
+          puts response.results
           cycs = response.results.map{|c| c["cycle"]}.uniq
           expect(cycs.include?("1980"))
         end
