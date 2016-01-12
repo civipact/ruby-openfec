@@ -6,11 +6,12 @@ module OpenFec
     include HTTParty
     base_uri 'https://api.open.fec.gov/v1'
     @@api_key = '' # Initialize API Key to blank string
+    @@api_key = ENV["OPEN_FEC_API_KEY"]
 
     ##################
     # Client Methods #
 
-    def is_valid(string)
+    def self.is_valid(string)
       !(string.nil? || string.empty?)
     end
 
@@ -18,7 +19,7 @@ module OpenFec
      @@api_key
     end
 
-    def hash_valid?(h = {})
+    def self.hash_valid?(h = {})
       !(h.nil? || h.empty?)
     end
 
@@ -26,11 +27,11 @@ module OpenFec
      @@api_key = key
     end
 
-    def has_api_key?
+    def self.has_api_key?
       !(self.api_key.nil? || self.api_key.empty?)
     end
 
-    def make_request(response)
+    def self.make_request(response)
       return Response.new(response)
     end
 
@@ -39,7 +40,7 @@ module OpenFec
       return { 'api_key' => @@api_key } # 'per_page' => '100' }
     end
 
-    def merge_options(q = {}, o = {}, param_type)
+    def self.merge_options(q = {}, o = {}, param_type)
       req_params = o.select{|k, v| @@valid_request_params[param_type].include?(k.to_s)}
       req_params.each do |k, v|
         q.merge!({k.to_s => v})
