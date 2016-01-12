@@ -1,8 +1,8 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'open_fec'
 require 'pry'
-require 'webmock/rspec'
-require 'support/stubbed_responses'
+#require 'webmock/rspec'
+#require 'support/stubbed_responses'
 #require 'json'
 
 RSpec.configure do |config|
@@ -15,7 +15,8 @@ RSpec.configure do |config|
     #stub_request(:any, /.*api.open.fec.gov*/).to_return(lambda { |request| @responses["#{request.uri.to_s}"] })
     #stub_request(:any, /.*api.open.fec.gov*/).to_return(lambda { |request| puts "#{request.uri.to_s}"})
     #puts fetch_fec_response('https://api.open.fec.gov:443/v1/candidates/?api_key=STUB_API_KEY&party=DEM')
-    stub_request(:any, /.*api.open.fec.gov*/).to_return(:status => 200, :body => lambda { |request| fetch_fec_response("#{request.uri.to_s}")}, :headers => {} )
+
+    #stub_request(:any, /.*api.open.fec.gov*/).to_return(:status => 200, :body => lambda { |request| fetch_fec_response("#{request.uri.to_s}")}, :headers => {} )
     #lambda { |request| "#{request.uri.host.to_s}" }
   end
   #config.include Webmock

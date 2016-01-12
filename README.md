@@ -24,46 +24,41 @@ Add `gem 'ruby-openfec'` to your application's *Gemfile* and run `bundle install
 
 ## Configuration
 
-Configure a client with your [API key](https://api.data.gov/signup/) before making requests.
+Configure a client with your [API key](https://api.data.gov/signup/) before making requests.  The API Key should be stored locally as an Environment variable in your Bash or Zsh Profile, called "OPEN_FEC_API_KEY"
 
-
-```` rb
-OpenFec::Client.api_key = 'yourapikeyfromtheurlabove'
 ````
+export OPEN_FEC_API_KEY=yourapikeyfromtheurlabove
+````
+
+
 
 ## Usage
 
-Create an instance of a class
-
-```` rb
-candidates = OpenFec::Candidate.new
-````
 
 Request a specific page by setting the `:page` parameter. Avoid reaching rate-limits by updating the `:per_page` request parameter, up to 100.
 
 ```` rb
 options = {:page => 1, :per_page => 100}
-lots_of_candidates = candidates.all_with(options)
+lots_of_candidates = OpenFec::Candidate.all_with(options)
 ````
 
 Make requests using endpoint-specific parameters.
 
 ```` rb
 options = {:party => "DEM"}
-democrats = candidates.all_with(options)
+democrats = OpenFec::Candidate.all_with(options)
 ````
 
 Make requests on Committee endpoint
 
 ```` rb
-committees = OpenFec::Committee.new
-every_committee = committees.all
+every_committee = OpenFec::Committee.all
 ````
 
 Request Committee history, by 'committee_id' parameter
 ```` rb
 options = {:committee_id => "C00462390"}
-com_hist = committees.history(options)
+comm_hist = OpenFec::Committee.history(options)
 ````
 
 

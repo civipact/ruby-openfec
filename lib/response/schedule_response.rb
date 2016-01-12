@@ -11,14 +11,6 @@ module OpenFec
       request.options[:query]
     end
 
-    # def limit
-    #   headers["x-ratelimit-limit"].to_i
-    # end
-
-    # def remaining
-    #   headers["x-ratelimit-remaining"].to_i
-    # end
-
     def page
       pagination["page"].to_i
     end
@@ -63,11 +55,6 @@ module OpenFec
     end
 
     def by_contributor_type
-      #total
-      #individual amount
-      #individual percentage
-      #committee amount
-      #committe percentage
       @contributions = {}
       total = 0
       if !@results.nil?
@@ -80,8 +67,8 @@ module OpenFec
           end
         end
       end
-      @contributions['individual-percent'] = (@contributions['individual'] / total).round(4)
-      @contributions['committee-percent'] = (@contributions['committee'] / total).round(4)
+      @contributions['individual-percent'] = (@contributions['individual'] / total).round(4) unless @contributions['individual'].nil?
+      @contributions['committee-percent'] = (@contributions['committee'] / total).round(4) unless @contributions['committee'].nil?
       @contributions['total'] = total.to_s
       return @contributions
     end
@@ -100,8 +87,6 @@ module OpenFec
       end
       @contributions['outside-contribution'] = (total - @contributions['home-contribution']).round(2) unless @contributions['home-contribution'].nil?
       @contributions['home-contribution'] = (@contributions['home-contribution']).round(2) unless @contributions['home-contribution'].nil?
-      #@contributions['home-percent'] = (@contributions['home-contribution'] / total).round(4) unless @contributions['home-percent'].nil?
-      #@contributions['outside-percent'] = (@contributions['outside-contribution'] / total).round(4) unless @contributions['outside-percent'].nil?
       @contributions['total'] = total.round(2)
       return @contributions
     end

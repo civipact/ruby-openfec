@@ -10,5 +10,5 @@ require "open_fec"
 # require "pry"
 # Pry.start
 
-require "irb"
-IRB.start
+require "pry"
+PRY.start

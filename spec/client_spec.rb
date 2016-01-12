@@ -6,14 +6,13 @@ module OpenFec
     describe '#Client' do
       context 'When configured' do
         before do
-          OpenFec::Client.api_key = 'STUB_API_KEY'
+          OpenFec::Client.api_key = ENV["OPEN_FEC_API_KEY"]
           @client = OpenFec::Client.new
         end
 
  
         it "contains a valid api key" do
-          @client = OpenFec::Client.new
-          expect(@client.has_api_key?)
+          expect(OpenFec::Client.has_api_key? == true)
         end
 
         # #MAJOR EDITS NEEDED HERE!

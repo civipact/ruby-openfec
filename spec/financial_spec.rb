@@ -5,33 +5,23 @@ module OpenFec
     describe '#Financial' do
       context 'Basic setup' do
         before do
-          OpenFec::Client.api_key = 'STUB_API_KEY'
+          OpenFec::Client.api_key = ENV['OPEN_FEC_API_KEY']
         end
 
-
-
-        it "contains a valid API key" do
-          @fin = OpenFec::Financial.new
-          puts @fin.api_key
-          expect(@fin.has_api_key?)
+        it "contains a valid api key" do
+          expect(OpenFec::Client.has_api_key? == true)
         end
 
         it "returns committee reports financial data in json format" do
-          @financials = OpenFec::Financial.new
           committee_id = 'C00563023'
-
-          response = @financials.committee_reports(committee_id)
-          #pp response.summary
+          response = OpenFec::Financial.committee_reports(committee_id)
           puts response.results
           expect(response).to be_kind_of(OpenFec::Response)
         end
 
         it "returns committee totals financial data in json format" do
           committee_id = 'C00563023'
-          @financials = OpenFec::Financial.new
-          response = @financials.committee_totals(committee_id)
-          #response = OpenFec::Financial.committee_totals(committee_id)
-          #pp response.summary
+          response = OpenFec::Financial.committee_totals(committee_id)
           puts response.results
           expect(response).to be_kind_of(OpenFec::Financial_Response)
         end
@@ -47,22 +37,14 @@ module OpenFec
 
         it "returns committee reports financial data in json format" do
           committee_type = 'presidential'
-          @financials = OpenFec::Financial.new  
-          response = @financials.reports_by_committee_type(committee_type)
-        #   response = OpenFec::Financial.reports_by_committee_type(committee_type)
-        #   #pp response.summary
+          response = OpenFec::Financial.reports_by_committee_type(committee_type)
           expect(response).to be_kind_of(OpenFec::Response)
         end
 
 
         it "allows create of class instance, and returns json data" do
-          @financials = OpenFec::Financial.new
           search_query = { 'office' => 'president', 'cycle' => '2000'} 
-          response = @financials.elections(search_query)
-          #puts response.results[:state]
-          # response = OpenFec::Financial.elections(search_query)
-          # response = OpenFec::Financial.reports_by_committee_type(committee_type)
-          #pp response.summary
+          response = OpenFec::Financial.elections(search_query)
           expect(response).to be_kind_of(OpenFec::Financial_Response)
         end
 
