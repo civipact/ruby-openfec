@@ -1,10 +1,10 @@
 module OpenFec
 	class Financial < Client
 
-      @@financial_endpoints = { 'committee_reports' => '/committee/{committee_id}/reports/',
-                                'committee_totals' => '/committee/{committee_id}/totals/',
-                                'elections' => '/elections/',
-                                'reports_by_committee_type' => '/reports/{committee_type}/' }
+      # @@financial_endpoints = { 'committee_reports' => '/committee/{committee_id}/reports/',
+      #                           'committee_totals' => '/committee/{committee_id}/totals/',
+      #                           'elections' => '/elections/',
+      #                           'reports_by_committee_type' => '/reports/{committee_type}/' }
 
 
 		def self.committee_reports(committee_id, options = {})

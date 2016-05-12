@@ -79,74 +79,85 @@ Run `bundle exec rspec spec/` to run the tests.
 #### OpenFec::Candidate
 
 ```ruby
-Candidate.all
-Candidate.all_sort_by(field)
-Candidate.all_where(options = {})
-Candidate.by_name(name)
-Candidate.history(candidate_id, options = {})
-Candidate.committees(candidate_id, options = {})
-Candidate.committee_history(candidate_id, options = {})
-Candidate.communication_costs(candidate_id, options = {})
-Candidate.electioneering_costs(candidate_id, options = {})
-Candidate.history_by_cycle(candidate_id, cycle)
+OpenFec::Candidate.all
+OpenFec::Candidate.all_sort_by(field)
+OpenFec::Candidate.all_where(options = {})
+OpenFec::Candidate.by_name(name)
+OpenFec::Candidate.history(candidate_id, options = {})
+OpenFec::Candidate.committees(candidate_id, options = {})
+OpenFec::Candidate.committee_history(candidate_id, options = {})
+OpenFec::Candidate.communication_costs(candidate_id, options = {})
+OpenFec::Candidate.electioneering_costs(candidate_id, options = {})
+OpenFec::Candidate.history_by_cycle(candidate_id, cycle)
 ```
 
 #### OpenFec::Committee
 
 ```ruby
-Committee.all
-Committee.all_sort_by(sort_field, options = {})
-Committee.all_where(options)
-Committee.history(options)
-Committee.history_by_cycle(committee_id, cycle)
-Committee.communication_costs(committee_id)
-Committee.electioneering_costs(committee_id)
-Committee.reports(committee_id)
-Committee.financial_totals(committee_id)
-Committee.schedule_a_by_contributor(committee_id)
-Committee.schedule_a_by_employer(committee_id)
+OpenFec::Committee.all
+OpenFec::Committee.all_sort_by(sort_field, options = {})
+OpenFec::Committee.all_where(options)
+OpenFec::Committee.history(options)
+OpenFec::Committee.history_by_cycle(committee_id, cycle)
+OpenFec::Committee.communication_costs(committee_id)
+OpenFec::Committee.electioneering_costs(committee_id)
+OpenFec::Committee.reports(committee_id)
+OpenFec::Committee.financial_totals(committee_id)
+OpenFec::Committee.schedule_a_by_contributor(committee_id)
+OpenFec::Committee.schedule_a_by_employer(committee_id)
 ```
 
 #### OpenFec::Schedule
 
 ```ruby
-Schedule.a_all
-Schedule.a_by_contributor(options)
-Schedule.a_by_contributor_type_and_candidate(options = {})
-Schedule.a_by_employer(options)
-Schedule.a_by_occupation(options)
-Schedule.a_by_size(options)
-Schedule.a_by_size_and_candidate(options = {})
-Schedule.a_by_state
-Schedule.a_by_state_and_candidate(options = {})
-Schedule.a_by_state(options)
-Schedule.a_by_zip({options})
+OpenFec::Schedule.a_all
+OpenFec::Schedule.a_by_contributor(options)
+OpenFec::Schedule.a_by_contributor_type_and_candidate(options = {})
+OpenFec::Schedule.a_by_employer(options)
+OpenFec::Schedule.a_by_occupation(options)
+OpenFec::Schedule.a_by_size(options)
+OpenFec::Schedule.a_by_size_and_candidate(options = {})
+OpenFec::Schedule.a_by_state
+OpenFec::Schedule.a_by_state_and_candidate(options = {})
+OpenFec::Schedule.a_by_state(options)
+OpenFec::Schedule.a_by_zip({options})
 
-Schedule.b_all
-Schedule.b_by_purpose({options})
-Schedule.b_by_recipient(options = {})
-Schedule.b_by_recipient_id(options = {})
-Schedule.b_by_committee_and_candidate(committee_id, options = {})
+OpenFec::Schedule.b_all
+OpenFec::Schedule.b_by_purpose({options})
+OpenFec::Schedule.b_by_recipient(options = {})
+OpenFec::Schedule.b_by_recipient_id(options = {})
+OpenFec::Schedule.b_by_committee_and_candidate(committee_id, options = {})
 
-Schedule.e_all
-Schedule.e_by_candidate({options})
+OpenFec::Schedule.e_all
+OpenFec::Schedule.e_by_candidate({options})
 ```
 
 #### OpenFec::Financial
 
 ```ruby
-Financial.committee_reports(committee_id)
-Financial.committee_totals(committee_id)
-Financial.elections({query_options})
-Financial.reports_by_committee_type(committee_type)
+OpenFec::Financial.committee_reports(committee_id)
+OpenFec::Financial.committee_totals(committee_id)
+OpenFec::Financial.elections({query_options})
+OpenFec::Financial.reports_by_committee_type(committee_type)
 ```
 
 #### OpenFec::Search
 
 ```ruby
-Search.candidates(name)
-Search.committees(name)
-Search.filings(options = {})
-Search.reporting_dates(options = {})
-Search.elections(options = {})
+OpenFec::Search.candidates(name)
+OpenFec::Search.committees(name)
+OpenFec::Search.filings(options = {})
+OpenFec::Search.reporting_dates(options = {})
+OpenFec::Search.elections(options = {})
 ```
+
+#### OpenFec::Date
+
+```ruby
+OpenFec::Date.calendar_dates
+OpenFec::Date.election_dates
+OpenFec::Date.reporting_dates
+```
+
+
+

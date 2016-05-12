@@ -115,6 +115,10 @@ module OpenFec
                                 'reporting_dates' => '/reporting-dates/',
                                 'elections' => '/elections/search/' }
 
+           @@date_endpoints = { 'calendar_dates' => '/calendar-dates',
+                                'election_dates' => '/election-dates/',
+                                'reporting_dates' => '/reporting-dates/' }
+
 
      ######################################################################
      # Hash contains arrays of valid request parameters for each subclass #
@@ -170,7 +174,21 @@ module OpenFec
                                 "cycle","sort","sort_hide_null","sort_nulls_large" ],
 
     'candidate_req_params' => [ "sort", "sort_hide_null", "year", "office", "candidate_status", "party", "state", "cycle",
-                                "district", "incumbent_challenge", "name", "candidate_id", "page", "per_page" ] }
+                                "district", "incumbent_challenge", "name", "candidate_id", "page", "per_page" ],
+
+    'cal_dates_req_params' => [ "sort_nulls_large", "per_page", "start_date", "api_key", "max_start_date", "min_end_date", "state", 
+                                "event_id", "category", "description", "max_end_date", "summary", "min_start_date", "sort_hide_null", "page"],
+
+   'elec_dates_req_params' => [ "sort_nulls_large", "per_page", "election_party", "max_update_date", "election_type_id", 
+                                "min_election_date", "api_key", "office_sought", "election_year", "max_create_date", "max_primary_general_date", 
+                                "election_date", "min_update_date", "min_create_date", "election_state", "election_district", "sort_hide_null", 
+                                "min_primary_general_date", "max_election_date"],
+
+    'rep_dates_req_params' => [ "sort_nulls_large", "per_page", "max_update_date", "sort", "page", "api_key", "min_due_date", 
+                                "report_type", "min_update_date", "report_year", "max_create_date", "max_due_date", 
+                                "sort_hide_null", "min_create_date"] }
+
+
 
 
   end #class Client

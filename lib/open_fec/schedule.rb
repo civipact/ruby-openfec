@@ -95,7 +95,7 @@ module OpenFec
 	    end
 
 	    def self.schedule_request(schedule_endpoint, param_type, options = {})
-	    	query = merge_options({'api_key' => @@api_key }, options, param_type)
+	    	query = merge_options({'api_key' => @@api_key, 'per_page' => 100 }, options, param_type)
 	    	return get_schedule_response( self.get(@@schedule_endpoints[schedule_endpoint], query: query) )
 	    end
 
